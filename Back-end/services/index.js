@@ -10,12 +10,13 @@ const getTasks = async () => {
   }
 };
 
+const validateTaskInput = (task) => Joi.object({
+  task: Joi.string().required(),
+  status: Joi.string().required(),
+}).validate(task);
+
 const createTask = async (task) => {
-  const validation = Joi.object({
-    task: Joi.string().required(),
-    status: Joi.string().required(),
-  }).validate(task);
-  if (validation.error) return { message: validation.error };
+  if (validateTaskInput(task).error) return { message: validation.error };
   try {
     return await tasksManagerModels.createTask(task);
   } catch (e) {
@@ -32,9 +33,9 @@ const updateTask = async (task) => {
   }
 };
 
-const deleteTask = async (id) => {
+const deleteTask = async (_id) => {
   try {
-    return await tasksManagerModels.deleteTask(id);
+    return await tasksManagerModels.deleteTask(_id);
   } catch (e) {
     return { message: 'Something is wrong...' };
   }
