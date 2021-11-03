@@ -3,7 +3,7 @@ const tasksManagerServices = require('../services');
 const getTasks = async (_req, res) => {
   const tasks =  await tasksManagerServices.getTasks();
   if (tasks.message) return res.status(500).json(tasks);
-  return tasks;
+  return res.status(200).json(tasks);
 }
 
 const createTask = (task) => tasksManagerServices.createTask(task);
