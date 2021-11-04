@@ -2,7 +2,7 @@ const tasksManagerServices = require('../services');
 
 const getTasks = async () => {
   const tasks =  await tasksManagerServices.getTasks();
-  if (tasks.message) return res.status(500).json(tasks);
+  if (tasks.message) return  new Error;
   return tasks;
 }
 
