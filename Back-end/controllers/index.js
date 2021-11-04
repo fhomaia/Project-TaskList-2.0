@@ -1,12 +1,6 @@
 const tasksManagerServices = require('../services');
 
-const getTasks = async () => {
-  const tasks =  await tasksManagerServices.getTasks();
-  if (tasks.message) return  new Error;
-  return tasks;
-}
-
-const fetchTasks = async (_req, res) => {
+const getTasks = async (_req, res) => {
   const tasks =  await tasksManagerServices.getTasks();
   if (tasks.message) return res.status(500).json(tasks);
   return res.status(200).json(tasks);
@@ -23,5 +17,4 @@ module.exports = {
   createTask,
   updateTask,
   deleteTask,
-  fetchTasks,
 }

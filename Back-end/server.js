@@ -8,22 +8,22 @@ const app = express();
 app.use(bodyParser.json());
 const http = require('http').createServer(app);
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
-const io = require('socket.io')(http, {
-  cors: {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  },
-});
+console.log(process.env)
 
-require('./sockets')(io);
+// const io = require('socket.io')(http, {
+//   cors: {
+//     origin: `http://localhost:${PORT}`,
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   },
+// });
 
 const taskManagerControllers = require('./controllers');
 
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/', taskManagerControllers.fetchTasks);
+app.get('/', taskManagerControllers.getTasks);
 
 http.listen(PORT, () => console.log(`App ouvindo na porta ${PORT}`));

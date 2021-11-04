@@ -1,31 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
-import PropTypes from 'prop-types';
 
-function TaskCard(props) {
-  const socket = io('http://localhost:3001');
-  const { _id, task, dueDate } = props.task;
-
+function TaskCard(task) {
+  const { _id, message, dueDate } = task;
   const [edit, setEdit] = useState(false);
-  const [updateTask, setUpdateTask] = useState(props.task);
+  const [updateTask, setUpdateTask] = useState(task);
+  const socket = io('http://localhost:3001');
+  const onClickDelete = socket.emit('deletTask', _id);
+  const editMode = () => setEdit(!edit);
 
-  const onClickDelete = () => socket.emit('deleteTask', _id);
-
-  
   const onChangeMessage = ({ target: { value }}) => (
-    setUpdateTask({ ...updateTask, task: value })
-    );
-    
+    setUpdateTask({ ...updateTask, message: value })
+  );
+
   const onChangeDueDate = ({ target: { value }}) => (
     setUpdateTask({ ...updateTask, dueDate: value })
   );
-  
-  const changeEditMode = () => setEdit(!edit);
-    
-  const onClickConfirm = () => {
-    socket.emit('updateTask', updateTask)
-    changeEditMode();
-  };
+
+  const onClickConfirm = socket.emit('updateTask', task);
 
   const disableLeftArrow = (status) => {
     if (status === 'Backlog') return true;
@@ -80,8 +72,8 @@ function TaskCard(props) {
   return (
       <div>
       <button type='button' onClick={ onClickDelete } >X</button>
-      <button type='button' onClick={ changeEditMode } >✏️</button>
-      <h3>{ task }</h3>
+      <button type='button' onClick={ editMode } >✏️</button>
+      <h3>{ message }</h3>
       <p>Due: { dueDate }</p>
       <button
         type='button'
@@ -100,13 +92,5 @@ function TaskCard(props) {
       </div>
   )
 }
-
-TaskCard.propTypes = {
-  task: PropTypes.shape({
-    _id: PropTypes.string,
-    task: PropTypes.string,
-    dueDate: PropTypes.string,
-  }).isRequired,
-};
 
 export default TaskCard;

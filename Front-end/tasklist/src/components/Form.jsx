@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import { io } from 'socket.io-client';
 
 function Form() {
-  const socket = io('http://localhost:3001');
+  const socket = io();
   const [task, setTask] = useState({ task: '', status: 'Backlog', dueDate:''});
   const onChangeTask = ({ target: { value }}) => setTask({ ...task, task: value });
   const onChangeStatus = ({ target: { value }}) => setTask({ ...task, status: value });
   const onChangeDueDate = ({ target: { value }}) => setTask({ ...task, dueDate: value });
   const onClickCreate = () => socket.emit('createTask', task);
   const disableCreate = () => {
+    console.log('aquiii')
     if (!task.task || !task.dueDate) return true;
     return false;
   };
 
+  console.log(task)
   return (
     <form>
       <label htmlFor='task'>
