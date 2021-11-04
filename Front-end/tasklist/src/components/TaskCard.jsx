@@ -44,6 +44,31 @@ function TaskCard(task) {
     socket.emit('updateTask', updateTask);
   }
 
+  const disableLeftArrow = (status) => {
+    if (status === 'Backlog') return true;
+    return false;
+  }
+
+  const disableRightArrow = (status) => {
+    if (status === 'Done') return true;
+    return false;
+  }
+
+  const moveTaskUpwards = (status) => {
+    const statusArray = ['Backlog', 'In-Progress', 'Testing','Done'];
+    const oldStatusPosition = statusArray.indexOf(status);
+    setUpdateTask({ ...updateTask, status: statusArray[oldStatusPosition + 1] });
+  }
+
+ useEffect(() => socket.emit('updateTask', updateTask), [updateTask.status])
+
+  const moveTaskDownwards = (status) => {
+    const statusArray = ['Backlog','In-Progress', 'Testing', 'Done'];
+    const oldStatusPosition = statusArray.indexOf(status);
+    setUpdateTask({ ...updateTask, status: statusArray[oldStatusPosition - 1] });
+    socket.emit('updateTask', updateTask);
+  }
+
   if (edit) {
     return (
       <div>
