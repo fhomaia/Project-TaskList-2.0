@@ -1,31 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
 
 import TaskCard from './TaskCard';
 
 function TaskBoard() {
-  const socket  = io('http://localhost:3001')
   const [tasks, setTasks] = useState([]);
 
   const fetchTasks = () => fetch('http://localhost:3001')
   .then((response) => response.json())
   .then((response) => setTasks(response))
   .catch(() => console.log('Server offline'));
-
   
-  useEffect(() => {
-    fetchTasks();
-    socket.on('tasks', (newTasks) => setTasks(newTasks));
-  },[]);
-  
+  useEffect(fetchTasks,[]);
   return (
     <div>
       <div>
         <h2>Backlog</h2>
         {
-          tasks.map((task) => {
+          tasks.forEach((task) => {
             if (task.status === 'Backlog') {
-              return <TaskCard task={task} key={task._id} />
+              <TaskCard task/>
             }
           })
         }
@@ -35,7 +28,7 @@ function TaskBoard() {
         {
           tasks.forEach((task) => {
             if (task.status === 'In-progress') {
-              <TaskCard key={task._id} task={task}/>
+              <TaskCard task/>
             }
           })
         }
@@ -45,7 +38,7 @@ function TaskBoard() {
         {
           tasks.forEach((task) => {
             if (task.status === 'Testing') {
-              <TaskCard task={task} key={task._id}/>
+              <TaskCard task/>
             }
           })
         }
@@ -55,7 +48,7 @@ function TaskBoard() {
         {
           tasks.forEach((task) => {
             if (task.status === 'Done') {
-              <TaskCard task={task} key={task._id}/>
+              <TaskCard task/>
             }
           })
         }
