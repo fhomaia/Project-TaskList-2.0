@@ -13,11 +13,10 @@ const getTasks = async () => {
 const validateTaskInput = (task) => Joi.object({
   task: Joi.string().required(),
   status: Joi.string().required(),
-  dueDate: Joi.string().required(),
 }).validate(task);
 
 const createTask = async (task) => {
-  if (validateTaskInput(task).error) return { message: validateTaskInput.error };
+  if (validateTaskInput(task).error) return { message: validation.error };
   try {
     return await tasksManagerModels.createTask(task);
   } catch (e) {
