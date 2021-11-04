@@ -1,6 +1,14 @@
+import React from 'react';
+import Form from '../components/Form';
+import TaskBoard from '../components/TaskBoard';
+
 function Home() {
   return (
-    <h1>Task List</h1>
+    <div>
+      <h1>Task List</h1>
+      <Form />
+      <TaskBoard />
+    </div>
   )
 }
 
