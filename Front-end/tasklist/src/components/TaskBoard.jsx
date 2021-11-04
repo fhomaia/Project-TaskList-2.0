@@ -33,9 +33,9 @@ function TaskBoard() {
       <div>
       <h2>In Progress</h2>
         {
-          tasks.forEach((task) => {
-            if (task.status === 'In-progress') {
-              <TaskCard key={task._id} task={task}/>
+          tasks.map((task) => {
+            if (task.status === 'In-Progress') {
+              return <TaskCard key={task._id} task={task}/>
             }
           })
         }
@@ -43,9 +43,9 @@ function TaskBoard() {
       <div>
       <h2>Testing</h2>
         {
-          tasks.forEach((task) => {
+          tasks.map((task) => {
             if (task.status === 'Testing') {
-              <TaskCard task={task} key={task._id}/>
+              return <TaskCard task={task} key={task._id}/>
             }
           })
         }
@@ -53,9 +53,9 @@ function TaskBoard() {
       <div>
       <h2>Done</h2>
         {
-          tasks.forEach((task) => {
+          tasks.map((task) => {
             if (task.status === 'Done') {
-              <TaskCard task={task} key={task._id}/>
+              return <TaskCard task={task} key={task._id}/>
             }
           })
         }
