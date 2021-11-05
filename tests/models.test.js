@@ -1,21 +1,21 @@
+/* eslint-env mocha */
 const { expect } = require('chai');
 const sinon = require('sinon');
 
 const { MongoClient } = require('mongodb');
 const getConnection = require('./connectionMock');
 
-const models = require('../models/');
+const models = require('../models');
 
 describe('Tests model layer', () => {
-
   const taskMock = {
     task: 'Exemplo',
     dueDate: '21/11/2021',
     status: 'Backlog',
-  }
+  };
 
   let connectionMock;
-  
+
   before(async () => {
     connectionMock = await getConnection();
 
@@ -27,21 +27,19 @@ describe('Tests model layer', () => {
     MongoClient.connect.restore();
   });
 
-
   describe('Tests function createTask', () => {
-
     it('tests if function returns an array', async () => {
-      const response  = await models.createTask(taskMock);
+      const response = await models.createTask(taskMock);
       expect(response).to.be.an('array');
     });
 
     it('tests if array has a length equals to 1', async () => {
-      const response  = await models.getTasks(taskMock);
+      const response = await models.getTasks(taskMock);
       expect(response.length).to.be.equal(1);
     });
 
     it('tests if such object has property _id', async () => {
-      const response  = await models.getTasks(taskMock);
+      const response = await models.getTasks(taskMock);
       expect(response[0]).to.have.a.property('_id');
     });
   });
@@ -49,11 +47,11 @@ describe('Tests model layer', () => {
   describe('Tests function getTasks', () => {
     it('tests if function returns an array', async () => {
       // const ans = await connectionMock.db('TaskManager').collection('tasks').deleteOne();
-      const response  = await models.getTasks();
+      const response = await models.getTasks();
       expect(response).to.be.an('array');
     });
     it('tests if function returns an empty array', async () => {
-      const response  = await models.getTasks();
+      const response = await models.getTasks();
       expect(response.length).to.be.equals(1);
     });
   });

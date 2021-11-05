@@ -15,8 +15,7 @@ async function connection() {
       schema = dbSchema;
       return schema;
     })
-    .catch((err) => {
-      console.error(err);
+    .catch(() => {
       process.exit(1);
     });
 }
