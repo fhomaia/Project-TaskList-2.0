@@ -1,1 +1,94 @@
-textarea { resize: none; }
+textarea { 
+  resize: none;
+  width: 90%;
+  margin-top: 5px;
+}
+
+body {
+  background-color: rgb(124, 124, 124);
+  text-align: center;
+}
+
+#taskboard {
+  background-color: rgb(233, 233, 129);
+  box-sizing: border-box;
+  border-radius: 12px;
+  display: flex;
+  height: 100%;
+  margin: auto;
+  width: 80%;
+}
+
+.statusrow {
+  box-sizing: border-box;
+  border-radius: 12px;
+  height: 100%;
+  text-align: center;
+  width: 25%;
+}
+
+.taskcard {
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+  width: 80%;
+  height: 160px;
+  margin: auto auto 5px;
+  text-align: center;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.statustitle {
+  width: 100%;
+  border-radius: 12px 12px 0 0;
+  background-color: royalblue;
+  margin-top: 0;
+  text-align: center;
+}
+
+#taskform {
+  background-color: rgb(233, 233, 129);
+  box-sizing: border-box;
+  border-radius: 12px;
+  display: flex;
+  margin: auto auto 5px;
+  width: 80%;
+  height: 50px;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+}
+
+.specialbutton {
+  background-color:#1aaa3e;
+  box-sizing: border-box;
+  border-radius:2em;
+  color:white;
+  display: block;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  margin:5px;
+  padding:0.3em 1.2em;
+  text-align:center;
+  text-decoration:none;
+  transition: all 0.2s;
+}
+.specialbutton:hover {
+  background-color:#466e20;
+}
+
+.specialbutton:disabled{
+  background-color:#adadad;
+  color:slategrey
+}
+
+#editdate {
+  width: 90%;
+  margin: 5px auto;
+}
+
+.confirm {
+  margin: 5px auto;
+}

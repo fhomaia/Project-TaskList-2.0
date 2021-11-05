@@ -14,7 +14,7 @@ function Form() {
   };
 
   return (
-    <form>
+    <form id='taskform'>
       <label htmlFor='task'>
         <textarea
         id='task'
@@ -38,6 +38,7 @@ function Form() {
         type='button'
         onClick={onClickCreate}
         disabled={disableCreate()}
+        className='specialbutton'
       >
         Create
       </button>

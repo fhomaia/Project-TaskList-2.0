@@ -19,9 +19,9 @@ function TaskBoard() {
   },[]);
   
   return (
-    <div>
-      <div>
-        <h2>Backlog</h2>
+    <div id='taskboard' >
+      <div className='statusrow' >
+        <h2 className='statustitle' >Backlog</h2>
         {
           tasks.map((task) => {
             if (task.status === 'Backlog') {
@@ -30,8 +30,8 @@ function TaskBoard() {
           })
         }
       </div>
-      <div>
-      <h2>In Progress</h2>
+      <div className='statusrow' >
+      <h2 className='statustitle' >In Progress</h2>
         {
           tasks.map((task) => {
             if (task.status === 'In-Progress') {
@@ -40,8 +40,8 @@ function TaskBoard() {
           })
         }
       </div>
-      <div>
-      <h2>Testing</h2>
+      <div className='statusrow' >
+      <h2 className='statustitle' >Testing</h2>
         {
           tasks.map((task) => {
             if (task.status === 'Testing') {
@@ -50,8 +50,8 @@ function TaskBoard() {
           })
         }
       </div>
-      <div>
-      <h2>Done</h2>
+      <div className='statusrow' >
+      <h2 className='statustitle' >Done</h2>
         {
           tasks.map((task) => {
             if (task.status === 'Done') {

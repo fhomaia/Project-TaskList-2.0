@@ -54,11 +54,16 @@ function TaskCard(props) {
 
   if (edit) {
     return (
-      <div>
+      <div className='taskcard'>
       <button type='button' onClick={ onClickDelete } >X</button>
       <button type='button' onClick={ changeEditMode } >✏️</button>
       <textarea value={ updateTask.task } onChange={ (e) => onChangeMessage(e) } />
-      <input value={ updateTask.dueDate } type='date' onChange={(e) => onChangeDueDate(e) } />
+      <input
+        value={ updateTask.dueDate }
+        type='date'
+        onChange={(e) => onChangeDueDate(e) }
+        id='editdate'
+      />
       <button
         type='button'
         disabled={ disableLeftArrow(updateTask.status) }
@@ -73,12 +78,18 @@ function TaskCard(props) {
       >
         &rarr;
       </button>
-      <button type='button' onClick={ onClickConfirm } >Confirm</button>
+      <button
+        type='button'
+        onClick={ onClickConfirm }
+        className='specialbutton confirm'
+      >
+        Confirm
+      </button>
       </div>
     )
   }
   return (
-      <div>
+      <div className='taskcard'>
       <button type='button' onClick={ onClickDelete } >X</button>
       <button type='button' onClick={ changeEditMode } >✏️</button>
       <h3>{ task }</h3>
